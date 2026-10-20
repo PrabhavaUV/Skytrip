@@ -1,0 +1,48 @@
+{
+  "name": "skytrip",
+  "version": "1.0.0",
+  "description": "Full-Stack MERN Airline Reservation Platform",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "compile": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "seed": "node server/seed/seedFlights.js",
+    "test:auth": "node server/tests/test_auth.js",
+    "test:flights": "node server/tests/test_flights.js",
+    "test:seats": "node server/tests/test_seats.js",
+    "test:bookings": "node server/tests/test_bookings.js"
+  },
+  "keywords": [
+    "mern",
+    "airline",
+    "flight-booking",
+    "mvc",
+    "rvce"
+  ],
+  "author": "Skytrip Team",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.23.3",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.10.0",
+    "nodemon": "^3.1.0",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}
