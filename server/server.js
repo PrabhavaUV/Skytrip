@@ -24,11 +24,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 // ── API Routes ───────────────────────────────────────────────────────────────
-// Member 1 (Auth & Wallet) — uncomment when auth routes are implemented:
-// const authRoutes   = require('./routes/authRoutes');
-// const walletRoutes = require('./routes/walletRoutes');
-// app.use('/api/auth',   authRoutes);
-// app.use('/api/wallet', walletRoutes);
+// Member 1 (Auth & Wallet)
+const authRoutes   = require('./routes/authRoutes');
+const walletRoutes = require('./routes/walletRoutes');
+app.use('/api/auth',   authRoutes);
+app.use('/api/wallet', walletRoutes);
 
 // Member 2 (Flights & Admin) — uncomment when flight routes are implemented:
 // const flightRoutes = require('./routes/flightRoutes');

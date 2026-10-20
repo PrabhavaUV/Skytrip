@@ -319,16 +319,16 @@ Open `http://localhost:5000` — you should see the Skytrip UI.
 
 ## 7. Done Checklist — Verify Before Pushing
 
-- [ ] `POST /api/auth/register` returns 201 with JWT token
-- [ ] `POST /api/auth/login` returns 200 with JWT token
-- [ ] `GET /api/auth/me` returns user data with wallet balance
-- [ ] `POST /api/wallet/topup` atomically updates balance
-- [ ] `server/middleware/auth.js` blocks requests without a valid token (returns 401)
-- [ ] Frontend: Login and Register pages work end-to-end
-- [ ] Frontend: Navbar shows wallet balance when logged in
-- [ ] Frontend: WalletModal successfully tops up balance live
-- [ ] `npm run test:auth` passes all assertions
-- [ ] No files outside your assigned list were modified (except `server.js` and `App.jsx` integrations)
+- [x] `POST /api/auth/register` returns 201 with JWT token
+- [x] `POST /api/auth/login` returns 200 with JWT token
+- [x] `GET /api/auth/me` returns user data with wallet balance
+- [x] `POST /api/wallet/topup` atomically updates balance
+- [x] `server/middleware/auth.js` blocks requests without a valid token (returns 401)
+- [x] Frontend: Login and Register pages work end-to-end
+- [x] Frontend: Navbar shows wallet balance when logged in
+- [x] Frontend: WalletModal successfully tops up balance live
+- [x] `npm run test:auth` passes all assertions
+- [x] No files outside your assigned list were modified (except `server.js` and `App.jsx` integrations)
 
 Once all boxes are checked, **push your code to the repository** and inform your team.  
 Member 2 cannot start until your auth middleware is available.

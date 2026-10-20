@@ -13,7 +13,7 @@ It defines the verification gates, test commands, and handoff criteria required 
 
 | Milestone | Module | Assignee | Dependencies | Test Command | Gateway Status |
 |---|---|---|---|---|---|
-| **Milestone 1** | Auth, User & Digital Wallet | Member 1 | Foundation skeleton | `npm run test:auth` | `[ ] PENDING` |
+| **Milestone 1** | Auth, User & Digital Wallet | Member 1 | Foundation skeleton | `npm run test:auth` | `[x] PASSED` |
 | **Milestone 2** | Flight Catalog, Search & Admin | Member 2 | Milestone 1 (Auth & Admin tokens) | `npm run test:flights` | `[ ] PENDING` |
 | **Milestone 3** | Seats, Cabin Dynamics & Passenger Registry | Member 3 | Milestone 2 (Flight schema & IDs) | `npm run test:seats` | `[ ] PENDING` |
 | **Milestone 4** | Bookings, Checkout & Tiered Refunds | Member 4 | Milestones 1, 2, 3 (Full stack integration) | `npm run test:bookings` | `[ ] PENDING` |
@@ -45,12 +45,12 @@ Execute the automated test suite:
 ```bash
 npm run test:auth
 ```
-- [ ] User registration creates database record with hashed password (`bcryptjs`)
-- [ ] Login returns valid signed JWT token
-- [ ] `GET /api/auth/me` validates token and returns sanitized user object (no password)
-- [ ] `POST /api/wallet/topup` updates balance atomically
-- [ ] Unauthenticated requests to protected routes receive `401 Unauthorized`
-- [ ] Frontend Login, Register, and Top-up UI elements verified in browser
+- [x] User registration creates database record with hashed password (`bcryptjs`)
+- [x] Login returns valid signed JWT token
+- [x] `GET /api/auth/me` validates token and returns sanitized user object (no password)
+- [x] `POST /api/wallet/topup` updates balance atomically
+- [x] Unauthenticated requests to protected routes receive `401 Unauthorized`
+- [x] Frontend Login, Register, and Top-up UI elements verified in browser
 
 ---
 
