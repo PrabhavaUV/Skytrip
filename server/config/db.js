@@ -2,18 +2,20 @@ const mongoose = require('mongoose');
 
 /**
  * Connects to MongoDB using the MONGO_URI from .env
- * Exits the process if the connection fails (no point running without a DB)
+ * Logs a helpful error message if connection fails, allowing the HTTP server
+ * and React frontend to remain accessible even if local MongoDB is offline.
  */
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      process.env.MONGO_URI || 'mongodb://localhost:27017/skytrip'
+      process.env.MONGO_URI || 'mongodb://localhost:27017/skytrip',
+      { serverSelectionTimeoutMS: 5000 }
     );
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`❌ MongoDB Connection Error: ${error.message}`);
-    console.error('Make sure MongoDB is running. See DEBUG_LOG.md → ERR-001');
-    process.exit(1);
+    console.warn(`⚠️ MongoDB Connection Warning: ${error.message}`);
+    console.warn('Backend database features require MongoDB running locally or a valid MONGO_URI in .env.');
+    console.warn('See DEBUG_LOG.md → ERR-001 for details.');
   }
 };
 
