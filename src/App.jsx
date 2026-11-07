@@ -37,6 +37,7 @@ function App() {
               {/* Member 2 Routes */}
               <Route path="/" element={<Home />} />
               <Route path="/flights" element={<SearchFlights />} />
+              <Route path="/admin" element={<AddFlight />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/add-flight" element={<AddFlight />} />
 

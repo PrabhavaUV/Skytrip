@@ -17,3 +17,4 @@ router.post('/', auth, admin, createFlight);
 router.delete('/:id', auth, admin, deleteFlight);
 
 module.exports = router;
+

@@ -184,3 +184,4 @@ function FlightCard({ flight }) {
 }
 
 export default FlightCard;
+
