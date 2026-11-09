@@ -8,10 +8,17 @@ import WalletModal from './components/WalletModal';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+// Member 2 Pages & Components
+import Home from './pages/Home';
+import SearchFlights from './pages/SearchFlights';
+import Footer from './components/Footer';
+import AdminLogin from './pages/admin/AdminLogin';
+import AddFlight from './pages/admin/AddFlight';
+
 // ── Routes are added here by each member in order ────────────────────────────
 //
 // Member 1 adds:  /login, /register (✅ ADDED)
-// Member 2 adds:  / (Home), /flights (Search), /admin/login, /admin/add-flight
+// Member 2 adds:  / (Home), /flights (Search), /admin/login, /admin/add-flight (✅ ADDED)
 // Member 3 adds:  /flights/:id (FlightDetails + SeatMap)
 // Member 4 adds:  /booking-summary, /confirmation/:bookingId, /my-bookings
 //
@@ -27,35 +34,19 @@ function App() {
           <WalletModal />
           <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Routes>
-              {/* Foundation placeholder — Member 2 will replace this with Home.jsx */}
-              <Route
-                path="/"
-                element={
-                  <div
-                    style={{
-                      flex: 1,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      padding: '3rem 1.5rem',
-                      textAlign: 'center',
-                      gap: '1rem'
-                    }}
-                  >
-                    <h1 style={{ color: '#D4AF37', fontSize: '2.5rem' }}>✈️ Skytrip</h1>
-                    <p style={{ color: '#a0aec0', maxWidth: '500px' }}>
-                      Auth & Digital Wallet ready! Sign up or log in to inspect your ₹5,000 wallet. Member 2 flight catalog builds next.
-                    </p>
-                  </div>
-                }
-              />
+              {/* Member 2 Routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/flights" element={<SearchFlights />} />
+              <Route path="/admin" element={<AddFlight />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/add-flight" element={<AddFlight />} />
 
               {/* Member 1 Routes */}
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
             </Routes>
           </main>
+          <Footer />
         </div>
       </Router>
     </AuthProvider>

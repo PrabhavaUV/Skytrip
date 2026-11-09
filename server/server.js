@@ -30,9 +30,9 @@ const walletRoutes = require('./routes/walletRoutes');
 app.use('/api/auth',   authRoutes);
 app.use('/api/wallet', walletRoutes);
 
-// Member 2 (Flights & Admin) — uncomment when flight routes are implemented:
-// const flightRoutes = require('./routes/flightRoutes');
-// app.use('/api/flights', flightRoutes);
+// Member 2 (Flights & Admin)
+const flightRoutes = require('./routes/flightRoutes');
+app.use('/api/flights', flightRoutes);
 
 // Member 3 (Seats) — uncomment when seat routes are implemented:
 // const seatRoutes = require('./routes/seatRoutes');
