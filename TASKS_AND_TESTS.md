@@ -14,7 +14,7 @@ It defines the verification gates, test commands, and handoff criteria required 
 | Milestone | Module | Assignee | Dependencies | Test Command | Gateway Status |
 |---|---|---|---|---|---|
 | **Milestone 1** | Auth, User & Digital Wallet | Member 1 | Foundation skeleton | `npm run test:auth` | `[x] PASSED` |
-| **Milestone 2** | Flight Catalog, Search & Admin | Member 2 | Milestone 1 (Auth & Admin tokens) | `npm run test:flights` | `[ ] PENDING` |
+| **Milestone 2** | Flight Catalog, Search & Admin | Member 2 | Milestone 1 (Auth & Admin tokens) | `npm run test:flights` | `[x] PASSED` |
 | **Milestone 3** | Seats, Cabin Dynamics & Passenger Registry | Member 3 | Milestone 2 (Flight schema & IDs) | `npm run test:seats` | `[ ] PENDING` |
 | **Milestone 4** | Bookings, Checkout & Tiered Refunds | Member 4 | Milestones 1, 2, 3 (Full stack integration) | `npm run test:bookings` | `[ ] PENDING` |
 
@@ -78,10 +78,10 @@ Execute the seed script and test suite:
 npm run seed
 npm run test:flights
 ```
-- [ ] Seed script successfully populates 5+ realistic domestic routes
-- [ ] Flight search filters by source, destination, and sorts by fare accurately
-- [ ] Non-admin cannot invoke `POST /api/flights` or `DELETE /api/flights/:id`
-- [ ] Frontend Hero Search (`Home.jsx`), Results (`SearchFlights.jsx`), and `AddFlight.jsx` verified
+- [x] Seed script successfully populates 5+ realistic domestic routes
+- [x] Flight search filters by source, destination, and sorts by fare accurately
+- [x] Non-admin cannot invoke `POST /api/flights` or `DELETE /api/flights/:id`
+- [x] Frontend Hero Search (`Home.jsx`), Results (`SearchFlights.jsx`), and `AddFlight.jsx` verified
 
 ---
 

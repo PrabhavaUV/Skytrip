@@ -259,6 +259,46 @@ const createFlight = async (req, res, next) => {
       (parseInt(businessRows, 10) || 0) * (parseInt(businessCols, 10) || 0) +
       (parseInt(economyRows, 10) || 0) * (parseInt(economyCols, 10) || 0);
 
+    // ── Member 3: Generate Seat Matrix ───────────────────────
+    const seats = [];
+    const colLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+    const numBaseFare = Number(baseFare);
+    const numMultiplier = Number(businessMultiplier) || 1.5;
+    const businessPrice = Math.round(numBaseFare * numMultiplier);
+
+    const bRows = parseInt(businessRows, 10) || 0;
+    const bCols = Math.min(parseInt(businessCols, 10) || 0, 6);
+    for (let row = 1; row <= bRows; row++) {
+      for (let col = 0; col < bCols; col++) {
+        const seatType = (col === 0 || col === bCols - 1) ? 'WINDOW' : 'AISLE';
+        seats.push({
+          seatNumber: `B${row}${colLabels[col]}`,
+          seatClass:  'BUSINESS',
+          seatType,
+          seatStatus: 'AVAILABLE',
+          price: seatType === 'WINDOW' ? businessPrice + 150 : businessPrice,
+        });
+      }
+    }
+
+    const eRows = parseInt(economyRows, 10) || 0;
+    const eCols = Math.min(parseInt(economyCols, 10) || 0, 6);
+    const economyPrice = numBaseFare;
+    for (let row = 1; row <= eRows; row++) {
+      for (let col = 0; col < eCols; col++) {
+        let seatType = 'MIDDLE';
+        if (col === 0 || col === eCols - 1) seatType = 'WINDOW';
+        else if (col === 1 || col === eCols - 2) seatType = 'AISLE';
+        seats.push({
+          seatNumber: `E${row}${colLabels[col]}`,
+          seatClass:  'ECONOMY',
+          seatType,
+          seatStatus: 'AVAILABLE',
+          price: seatType === 'WINDOW' ? economyPrice + 150 : economyPrice,
+        });
+      }
+    }
+
     let savedId = null;
 
     if (mongoose.connection.readyState === 1) {
@@ -269,9 +309,10 @@ const createFlight = async (req, res, next) => {
         destinationAirport: destinationAirport.trim().toUpperCase(),
         departureTime: new Date(departureTime),
         arrivalTime: new Date(arrivalTime),
-        baseFare: Number(baseFare),
+        baseFare: numBaseFare,
         taxes: Number(taxes) || 350,
-        businessMultiplier: Number(businessMultiplier) || 1.5,
+        businessMultiplier: numMultiplier,
+        seats,
       });
 
       await newFlight.save();
@@ -287,11 +328,11 @@ const createFlight = async (req, res, next) => {
         destinationAirport: destinationAirport.trim().toUpperCase(),
         departureTime: new Date(departureTime),
         arrivalTime: new Date(arrivalTime),
-        baseFare: Number(baseFare),
+        baseFare: numBaseFare,
         taxes: Number(taxes) || 350,
-        businessMultiplier: Number(businessMultiplier) || 1.5,
+        businessMultiplier: numMultiplier,
         availableSeatsCount: totalSeats,
-        seats: [],
+        seats,
       };
       memoryFlights.unshift(newFlight);
     }

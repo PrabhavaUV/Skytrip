@@ -16,7 +16,7 @@ const generateToken = (user) => {
  */
 exports.register = async (req, res, next) => {
   try {
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone, role } = req.body;
 
     if (!name || !email || !password || !phone) {
       return res.status(400).json({
@@ -38,7 +38,7 @@ exports.register = async (req, res, next) => {
       email: email.toLowerCase().trim(),
       password,
       phone: phone.trim(),
-      role: 'CUSTOMER',
+      role: role === 'ADMIN' ? 'ADMIN' : 'CUSTOMER',
       walletBalance: 5000.00,
       walletTransactions: [
         {

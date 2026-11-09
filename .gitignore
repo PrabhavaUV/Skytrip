@@ -15,3 +15,6 @@ public/app.bundle.js.LICENSE.txt
 Thumbs.db
 .vscode/
 .idea/
+
+# ── Local MongoDB Data ────────────────────────────────
+data/
