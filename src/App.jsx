@@ -18,12 +18,17 @@ import AddFlight from './pages/admin/AddFlight';
 // Member 3 Pages
 import FlightDetails from './pages/FlightDetails';
 
+// Member 4 Pages
+import BookingSummary from './pages/BookingSummary';
+import Confirmation from './pages/Confirmation';
+import MyBookings from './pages/MyBookings';
+
 // ── Routes are added here by each member in order ────────────────────────────
 //
 // Member 1 adds:  /login, /register (✅ ADDED)
 // Member 2 adds:  / (Home), /flights (Search), /admin/login, /admin/add-flight (✅ ADDED)
-// Member 3 adds:  /flights/:id (FlightDetails + SeatMap)
-// Member 4 adds:  /booking-summary, /confirmation/:bookingId, /my-bookings
+// Member 3 adds:  /flights/:id (FlightDetails + SeatMap) (✅ ADDED)
+// Member 4 adds:  /booking-summary, /confirmation/:bookingId, /my-bookings (✅ ADDED)
 //
 // Do NOT delete existing routes when adding your own.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -46,6 +51,11 @@ function App() {
 
               {/* Member 3 Routes */}
               <Route path="/flights/:id" element={<FlightDetails />} />
+
+              {/* Member 4 Routes */}
+              <Route path="/booking-summary" element={<BookingSummary />} />
+              <Route path="/confirmation/:bookingId" element={<Confirmation />} />
+              <Route path="/my-bookings" element={<MyBookings />} />
 
               {/* Member 1 Routes */}
               <Route path="/login" element={<Login />} />

@@ -15,8 +15,8 @@ It defines the verification gates, test commands, and handoff criteria required 
 |---|---|---|---|---|---|
 | **Milestone 1** | Auth, User & Digital Wallet | Member 1 | Foundation skeleton | `npm run test:auth` | `[x] PASSED` |
 | **Milestone 2** | Flight Catalog, Search & Admin | Member 2 | Milestone 1 (Auth & Admin tokens) | `npm run test:flights` | `[x] PASSED` |
-| **Milestone 3** | Seats, Cabin Dynamics & Passenger Registry | Member 3 | Milestone 2 (Flight schema & IDs) | `npm run test:seats` | `[ ] PENDING` |
-| **Milestone 4** | Bookings, Checkout & Tiered Refunds | Member 4 | Milestones 1, 2, 3 (Full stack integration) | `npm run test:bookings` | `[ ] PENDING` |
+| **Milestone 3** | Seats, Cabin Dynamics & Passenger Registry | Member 3 | Milestone 2 (Flight schema & IDs) | `npm run test:seats` | `[x] PASSED` |
+| **Milestone 4** | Bookings, Checkout & Tiered Refunds | Member 4 | Milestones 1, 2, 3 (Full stack integration) | `npm run test:bookings` | `[x] PASSED` |
 
 ---
 
@@ -106,10 +106,10 @@ Execute the automated seat concurrency and hold test:
 ```bash
 npm run test:seats
 ```
-- [ ] Seats in `AVAILABLE` state can be placed on `HOLD` with `heldUntil` timestamp (+300s)
-- [ ] Already held or booked seats cannot be held by another user (returns 409 Conflict)
-- [ ] Passenger validation rejects invalid Aadhaar (< 12 digits or non-numeric)
-- [ ] Passenger registry rejects duplicate Aadhaar/Passport within the same party
+- [x] Seats in `AVAILABLE` state can be placed on `HOLD` with `heldUntil` timestamp (+300s)
+- [x] Already held or booked seats cannot be held by another user (returns 409 Conflict)
+- [x] Passenger validation rejects invalid Aadhaar (< 12 digits or non-numeric)
+- [x] Passenger registry rejects duplicate Aadhaar/Passport within the same party
 - [ ] Frontend Seat Map (`SeatMap.jsx`) reflects real-time status and selection limits
 
 ---
@@ -145,8 +145,8 @@ Execute the full booking and tiered refund test:
 ```bash
 npm run test:bookings
 ```
-- [ ] Booking creation atomically checks wallet balance, debits wallet, marks seats `BOOKED`
-- [ ] Booking creation fails gracefully if wallet balance is insufficient
-- [ ] Cancellation calculates exact percentage based on departure time delta
-- [ ] Refund credit is atomically returned to user's wallet
+- [x] Booking creation atomically checks wallet balance, debits wallet, marks seats `BOOKED`
+- [x] Booking creation fails gracefully if wallet balance is insufficient
+- [x] Cancellation calculates exact percentage based on departure time delta
+- [x] Refund credit is atomically returned to user's wallet
 - [ ] End-to-end user flow: Search $\rightarrow$ Select Seats $\rightarrow$ Passenger Details $\rightarrow$ Wallet Checkout $\rightarrow$ E-Ticket $\rightarrow$ Cancellation/Refund verified in browser
