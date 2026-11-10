@@ -11,7 +11,7 @@ Built using the Model-View-Controller (MVC) pattern with MongoDB, Express.js, Re
 - [x] **Milestone 1: Member 1 - Auth, User & Digital Wallet** (User schema, JWT auth, wallet top-up/debit)
 - [x] **Milestone 2: Member 2 - Flight Catalog & Admin Portal** (Flight schema, search query filter, admin add flight)
 - [x] **Milestone 3: Member 3 - Cabin Seats & Passenger Registry** (2D cabin map, seat hold, Aadhaar validation)
-- [ ] **Milestone 4: Member 4 - Bookings, Orders & Tiered Refunds** (Atomic checkout, tiered refund cancellation, E-Ticket)
+- [x] **Milestone 4: Member 4 - Bookings, Orders & Tiered Refunds** (Atomic checkout, tiered refund cancellation, E-Ticket)
 
 ---
 
