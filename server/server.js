@@ -34,9 +34,9 @@ app.use('/api/wallet', walletRoutes);
 const flightRoutes = require('./routes/flightRoutes');
 app.use('/api/flights', flightRoutes);
 
-// Member 3 (Seats) — uncomment when seat routes are implemented:
-// const seatRoutes = require('./routes/seatRoutes');
-// app.use('/api/seats', seatRoutes);
+// Member 3 (Seats)
+const seatRoutes = require('./routes/seatRoutes');
+app.use('/api/seats', seatRoutes);
 
 // Member 4 (Bookings) — uncomment when booking routes are implemented:
 // const bookingRoutes = require('./routes/bookingRoutes');

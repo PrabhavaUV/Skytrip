@@ -15,6 +15,9 @@ import Footer from './components/Footer';
 import AdminLogin from './pages/admin/AdminLogin';
 import AddFlight from './pages/admin/AddFlight';
 
+// Member 3 Pages
+import FlightDetails from './pages/FlightDetails';
+
 // ── Routes are added here by each member in order ────────────────────────────
 //
 // Member 1 adds:  /login, /register (✅ ADDED)
@@ -40,6 +43,9 @@ function App() {
               <Route path="/admin" element={<AddFlight />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/add-flight" element={<AddFlight />} />
+
+              {/* Member 3 Routes */}
+              <Route path="/flights/:id" element={<FlightDetails />} />
 
               {/* Member 1 Routes */}
               <Route path="/login" element={<Login />} />

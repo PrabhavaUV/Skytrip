@@ -10,8 +10,8 @@ const flights = [
     aircraftType: 'Boeing 737-800',
     sourceAirport: 'BLR',
     destinationAirport: 'DEL',
-    departureTime: new Date(Date.now() + 86400000 * 2), // 2 days from now
-    arrivalTime: new Date(Date.now() + 86400000 * 2 + 1000 * 60 * 165), // +2h45m
+    departureTime: new Date(Date.now() + 86400000 * 1), // Tomorrow (matches default search date)
+    arrivalTime: new Date(Date.now() + 86400000 * 1 + 1000 * 60 * 165), // +2h45m
     baseFare: 4500,
     taxes: 350,
     businessMultiplier: 1.6,
@@ -21,9 +21,31 @@ const flights = [
     aircraftType: 'Airbus A320neo',
     sourceAirport: 'BLR',
     destinationAirport: 'DEL',
-    departureTime: new Date(Date.now() + 86400000 * 2 + 1000 * 60 * 360), // evening
-    arrivalTime: new Date(Date.now() + 86400000 * 2 + 1000 * 60 * 525),
+    departureTime: new Date(Date.now() + 86400000 * 1 + 1000 * 60 * 360), // Tomorrow evening
+    arrivalTime: new Date(Date.now() + 86400000 * 1 + 1000 * 60 * 525),
     baseFare: 5200,
+    taxes: 350,
+    businessMultiplier: 1.5,
+  },
+  {
+    flightNumber: 'SKY-103',
+    aircraftType: 'Boeing 737-800',
+    sourceAirport: 'BLR',
+    destinationAirport: 'DEL',
+    departureTime: new Date(Date.now() + 86400000 * 2), // 2 days from now
+    arrivalTime: new Date(Date.now() + 86400000 * 2 + 1000 * 60 * 165),
+    baseFare: 4600,
+    taxes: 350,
+    businessMultiplier: 1.6,
+  },
+  {
+    flightNumber: 'SKY-104',
+    aircraftType: 'Airbus A320neo',
+    sourceAirport: 'BLR',
+    destinationAirport: 'DEL',
+    departureTime: new Date(Date.now() + 86400000 * 2 + 1000 * 60 * 360),
+    arrivalTime: new Date(Date.now() + 86400000 * 2 + 1000 * 60 * 525),
+    baseFare: 5300,
     taxes: 350,
     businessMultiplier: 1.5,
   },
@@ -84,6 +106,44 @@ const flights = [
   },
 ];
 
+function generateSeats(baseFare, businessMultiplier = 1.5, businessRows = 2, businessCols = 2, economyRows = 8, economyCols = 6) {
+  const seats = [];
+  const colLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+  const numBaseFare = Number(baseFare);
+  const numMultiplier = Number(businessMultiplier) || 1.5;
+  const businessPrice = Math.round(numBaseFare * numMultiplier);
+
+  for (let row = 1; row <= businessRows; row++) {
+    for (let col = 0; col < businessCols; col++) {
+      const seatType = (col === 0 || col === businessCols - 1) ? 'WINDOW' : 'AISLE';
+      seats.push({
+        seatNumber: `B${row}${colLabels[col]}`,
+        seatClass: 'BUSINESS',
+        seatType,
+        seatStatus: 'AVAILABLE',
+        price: seatType === 'WINDOW' ? businessPrice + 150 : businessPrice,
+      });
+    }
+  }
+
+  const economyPrice = numBaseFare;
+  for (let row = 1; row <= economyRows; row++) {
+    for (let col = 0; col < economyCols; col++) {
+      let seatType = 'MIDDLE';
+      if (col === 0 || col === economyCols - 1) seatType = 'WINDOW';
+      else if (col === 1 || col === economyCols - 2) seatType = 'AISLE';
+      seats.push({
+        seatNumber: `E${row}${colLabels[col]}`,
+        seatClass: 'ECONOMY',
+        seatType,
+        seatStatus: 'AVAILABLE',
+        price: seatType === 'WINDOW' ? economyPrice + 150 : economyPrice,
+      });
+    }
+  }
+  return seats;
+}
+
 async function seed() {
   try {
     const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/skytrip';
@@ -93,8 +153,13 @@ async function seed() {
     await Flight.deleteMany({});
     console.log('🧹 Cleared existing flight catalog');
 
-    const created = await Flight.insertMany(flights);
-    console.log(`✅ Seeded ${created.length} flights into Skytrip catalog!`);
+    const flightsWithSeats = flights.map((flight) => ({
+      ...flight,
+      seats: generateSeats(flight.baseFare, flight.businessMultiplier),
+    }));
+
+    const created = await Flight.insertMany(flightsWithSeats);
+    console.log(`✅ Seeded ${created.length} flights with full seat layouts into Skytrip catalog!`);
 
     await mongoose.connection.close();
     process.exit(0);
