@@ -38,9 +38,9 @@ app.use('/api/flights', flightRoutes);
 const seatRoutes = require('./routes/seatRoutes');
 app.use('/api/seats', seatRoutes);
 
-// Member 4 (Bookings) — uncomment when booking routes are implemented:
-// const bookingRoutes = require('./routes/bookingRoutes');
-// app.use('/api/bookings', bookingRoutes);
+// Member 4 (Bookings)
+const bookingRoutes = require('./routes/bookingRoutes');
+app.use('/api/bookings', bookingRoutes);
 
 // ── React SPA Fallback ───────────────────────────────────────────────────────
 // Any non-API request gets the index.html so React Router handles client-side navigation
