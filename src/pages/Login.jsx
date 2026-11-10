@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
@@ -10,6 +10,7 @@ const Login = () => {
 
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +35,8 @@ const Login = () => {
       }
 
       login(data.user, data.token);
-      navigate('/');
+      const redirectPath = location.state?.from || '/';
+      navigate(redirectPath, { state: location.state });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -62,6 +64,23 @@ const Login = () => {
             Sign in to access your Skytrip wallet & flights
           </p>
         </div>
+
+        {location.state?.message && !error && (
+          <div
+            style={{
+              padding: '0.75rem 1rem',
+              borderRadius: 'var(--radius-sm)',
+              background: 'rgba(212, 175, 55, 0.1)',
+              border: '1px solid rgba(212, 175, 55, 0.3)',
+              color: 'var(--accent-gold)',
+              fontSize: '0.875rem',
+              marginBottom: '1.25rem',
+              textAlign: 'center'
+            }}
+          >
+            {location.state.message}
+          </div>
+        )}
 
         {error && (
           <div

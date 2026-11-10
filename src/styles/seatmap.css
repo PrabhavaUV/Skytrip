@@ -1,0 +1,285 @@
+/* ============================================================
+   SKYTRIP — 2D Aircraft Cabin & Seat Map Styles
+   Member 3: Cabin Dynamics & Passenger Registry
+   ============================================================ */
+
+.fuselage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem auto;
+  max-width: 680px;
+  width: 100%;
+}
+
+.aircraft-nose {
+  width: 180px;
+  height: 60px;
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.25) 0%, rgba(20, 27, 45, 0.8) 100%);
+  border-top-left-radius: 90px;
+  border-top-right-radius: 90px;
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 -4px 15px rgba(212, 175, 55, 0.1);
+}
+
+.cockpit-window {
+  width: 60px;
+  height: 14px;
+  background: rgba(14, 165, 233, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+}
+
+.fuselage-body {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.cabin-section {
+  margin-bottom: 2rem;
+}
+
+.cabin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.cabin-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cabin-pricing-pill {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Cabin Row Layouts */
+.business-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.economy-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+
+.row-label {
+  width: 24px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.seat-cluster {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.aisle-gap {
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.galley-separator {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  margin: 2rem 0;
+  position: relative;
+  text-align: center;
+}
+
+.galley-label {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  padding: 0 1rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Seat Buttons */
+.seat-btn {
+  border-radius: 6px 6px 4px 4px;
+  border: 1.5px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  user-select: none;
+}
+
+.business-seat {
+  width: 52px;
+  height: 52px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.economy-seat {
+  width: 42px;
+  height: 42px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Seat Statuses */
+.seat-btn.seat-available {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #86efac;
+}
+
+.seat-btn.seat-available:hover {
+  background: rgba(34, 197, 94, 0.25);
+  border-color: var(--seat-available);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+}
+
+.seat-btn.seat-selected {
+  background: linear-gradient(135deg, #D4AF37 0%, #b89628 100%);
+  border-color: #ffd700;
+  color: #0a0f1f;
+  font-weight: 700;
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.seat-btn.seat-hold {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--seat-hold);
+  color: #fbbf24;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.seat-btn.seat-booked {
+  background: #1e293b;
+  border-color: #334155;
+  color: #64748b;
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.seat-surcharge-tag {
+  font-size: 0.55rem;
+  line-height: 1;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+
+/* Legend */
+.seat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.25rem 0 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+
+.legend-available {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: var(--seat-available);
+}
+
+.legend-selected {
+  background: var(--accent-gold);
+  border-color: #ffd700;
+}
+
+.legend-hold {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: var(--seat-hold);
+}
+
+.legend-booked {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+/* Bottom Price Bar */
+.seatmap-price-bar {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-bar-text {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.price-bar-amount {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-left: 0.5rem;
+}
