@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const Flight = require('../models/Flight');
+const User = require('../models/User');
 
 dotenv.config();
 
@@ -160,6 +161,19 @@ async function seed() {
 
     const created = await Flight.insertMany(flightsWithSeats);
     console.log(`✅ Seeded ${created.length} flights with full seat layouts into Skytrip catalog!`);
+
+    // ── Seed Default Admin Account ──────────────────────────
+    await User.deleteOne({ email: 'admin@skytrip.com' });
+    const adminUser = new User({
+      name: 'Skytrip Operations Admin',
+      email: 'admin@skytrip.com',
+      password: 'Admin@123',
+      phone: '9876543210',
+      role: 'ADMIN',
+      walletBalance: 100000.00,
+    });
+    await adminUser.save();
+    console.log('✅ Default Admin seeded: admin@skytrip.com (Password: Admin@123)');
 
     await mongoose.connection.close();
     process.exit(0);

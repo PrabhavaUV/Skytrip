@@ -35,8 +35,13 @@ const Login = () => {
       }
 
       login(data.user, data.token);
-      const redirectPath = location.state?.from || '/';
-      navigate(redirectPath, { state: location.state });
+
+      if (data.user?.role === 'ADMIN') {
+        navigate('/admin/add-flight');
+      } else {
+        const redirectPath = location.state?.from || '/';
+        navigate(redirectPath, { state: location.state });
+      }
     } catch (err) {
       setError(err.message);
     } finally {

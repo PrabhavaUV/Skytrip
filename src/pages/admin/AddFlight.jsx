@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 function AddFlight() {
-  const { user, token, isAuthenticated } = useAuth();
+  const { user, token, isAuthenticated, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
-  // Redirect if not authenticated or not ADMIN
+  // Redirect if not authenticated or not ADMIN (after auth state loads)
   useEffect(() => {
-    if (!isAuthenticated || user?.role !== 'ADMIN') {
+    if (!authLoading && (!token || user?.role !== 'ADMIN')) {
       navigate('/admin/login');
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [authLoading, token, user, navigate]);
 
   const [form, setForm] = useState({
     flightNumber: '',
@@ -134,6 +134,14 @@ function AddFlight() {
       alert(`Error deleting flight: ${err.message}`);
     }
   };
+
+  if (authLoading) {
+    return (
+      <div style={{ padding: '4rem 1.5rem', textAlign: 'center', color: '#94a3b8' }}>
+        <p>Verifying admin session...</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2.5rem 1.5rem', width: '100%' }}>

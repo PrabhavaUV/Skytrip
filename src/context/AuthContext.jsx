@@ -92,6 +92,7 @@ export const AuthProvider = ({ children }) => {
         user,
         token,
         loading,
+        isAuthenticated: Boolean(token && user),
         login,
         logout,
         updateWalletBalance,

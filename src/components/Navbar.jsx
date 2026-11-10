@@ -80,7 +80,7 @@ const Navbar = () => {
 
               {user.role === 'ADMIN' && (
                 <Link
-                  to="/admin"
+                  to="/admin/add-flight"
                   style={{
                     color: 'var(--accent-gold)',
                     fontSize: '0.85rem',

@@ -20,9 +20,6 @@ function Footer() {
           <span style={{ color: '#475569' }}>|</span>
           <span>Next-Gen Airline Reservation Platform</span>
         </div>
-        <p style={{ margin: 0, color: '#64748b' }}>
-          Built for RVCE MCA Semester III (MCA261IA) Experiential Learning.
-        </p>
         <p style={{ margin: 0, color: '#475569', fontSize: '0.75rem' }}>
           &copy; {new Date().getFullYear()} Skytrip Team. All rights reserved.
         </p>

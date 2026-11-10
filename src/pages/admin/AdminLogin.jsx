@@ -8,8 +8,15 @@ function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const { login } = useAuth();
+  const { user, token, login, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+
+  // If already authenticated as ADMIN, redirect straight to add-flight
+  useEffect(() => {
+    if (!authLoading && token && user?.role === 'ADMIN') {
+      navigate('/admin/add-flight');
+    }
+  }, [authLoading, token, user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
